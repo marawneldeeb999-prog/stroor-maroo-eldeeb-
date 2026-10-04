@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الدفع الآمن و اصدار الفاتورة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-checkout.css?v=2">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">Alaa & Marwan Store</div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-store"></i> المتجر</a>
+            <a href="checkout.html" class="active"><i class="fas fa-credit-card"></i>الدفع و اصدر الفواتير</a>
+            <a href="customer.html" id="customerNavLink" style="display:none;"><i class="fas fa-user"></i> الحساب اليومي لدي المتجر</a>
+            <a href="ad.html" id="adminNavLink" style="display:none;"><i class="fas fa-user-shield"></i>لوحة التحكم  لدي المتجر</a>
+        </nav>
+        <button id="darkModeToggle" class="btn-dark-mode"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <section class="checkout-steps" aria-label="مرحبا بك في مراحل إتمام الطلب">
+        <button type="button" class="checkout-step step-blue" data-target="custName"><span>1</span><strong>البيانات</strong>
+        </button>
+        <div class="step-line">
+        </div>
+        <button type="button" class="checkout-step step-orange active" data-target="dynamicPaymentFields"><span>2</span>
+            <strong>الدفع</strong>
+        </button>
+        <div class="step-line">
+        </div>
+        <button type="button" class="checkout-step step-green" data-target="checkoutSummaryList"><span>3</span>
+            <strong>التأكيد</strong>
+        </button>
+    </section>
+
+    <main class="checkout-container">
+        <section class="checkout-form-section">
+            <h1 class="secure-heading">بيانات الشحن والدفع <i class="fas fa-lock"></i></h1>
+            <form id="checkoutForm" novalidate>
+                <div class="customer-details-grid">
+                    <div class="form-group">
+                        <label for="custName">الاسم (ثنائي أو ثلاثي)</label>
+                        <input type="text" id="custName" required placeholder="الاسم" autocomplete="name" autocapitalize="words">
+                    </div>
+                    <div class="form-group">
+                        <label for="custPhone">رقم الهاتف المحمول</label>
+                        <input type="tel" id="custPhone" required placeholder="01xxxxxxxxx" autocomplete="tel" inputmode="numeric" maxlength="11" pattern="01[0125][0-9]{8}" dir="ltr">
+                    </div>
+                    <div class="form-group">
+                        <label for="custGovernorate">المحافظة</label>
+                        <select id="custGovernorate" required autocomplete="address-level1">
+            <option value="" selected disabled>اختر المحافظة</option>
+    <option>القاهرة</option>
+        <option>الجيزة</option>
+            <option>الإسكندرية</option>
+                <option>الدقهلية</option>
+                    <option>البحر الأحمر</option>
+                        <option>البحيرة</option>
+                            <option>الفيوم</option>
+                                <option>الغربية</option>
+                                    <option>الإسماعيلية</option>
+                                        <option>المنوفية</option>
+
+                    <option>المنيا</option>
+                        <option>القليوبية</option>
+                            <option>الوادي الجديد</option>
+                                <option>السويس</option>
+                                    <option>أسوان</option>
+                                        <option>أسيوط</option>
+                                            <option>بني سويف</option>
+                                                    <option>بورسعيد</option>
+                                                        <option>دمياط</option>
+
+                    <option>الشرقية</option>
+                        <option>جنوب سيناء</option>
+                            <option>كفر الشيخ</option>
+                                <option>مطروح</option>
+                                    <option>الأقصر</option>
+                                        <option>قنا</option>
+                                            <option>شمال سيناء</option>
+                                                    <option>سوهاج</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="custCity">المدينة أو المركز</label>
+                        <input type="text" id="custCity" required minlength="2" maxlength="80" placeholder="اسم المدينة أو المركز" autocomplete="address-level2">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="custStreet">اسم الشارع</label>
+                        <input type="text" id="custStreet" required minlength="3" maxlength="120" placeholder="اسم الشارع" autocomplete="address-line1">
+                    </div>
+                    <div class="address-number-grid">
+                        <div class="form-group">
+                            <label for="custBuilding">رقم المبنى</label>
+                            <input type="number" id="custBuilding" required min="1" step="1" inputmode="numeric" placeholder="رقم المبنى">
+                        </div>
+                        <div class="form-group">
+                            <label for="custFloor">الدور</label>
+                            <input type="number" id="custFloor" required min="0" step="1" inputmode="numeric" placeholder="0 للأرضي">
+                        </div>
+                        <div class="form-group">
+                            <label for="custApartment">رقم الشقة</label>
+                            <input type="number" id="custApartment" required min="1" step="1" inputmode="numeric" placeholder="رقم الشقة">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>اختر طريقة الدفع</span>
+                    <div class="payment-options-grid">
+                        <div class="payment-option active" data-method="Visa"><i class="fab fa-cc-visa"></i> بطاقة فيزا / ماستر كارد</div>
+                        <div class="payment-option" data-method="Vodafone Cash"><i class="fas fa-mobile-alt"></i> فودافون كاش</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>اختر وسيلة التوصيل</span>
+                    <iframe
+                        id="deliveryMethodFrame"
+                        class="delivery-method-frame"
+                        src="delivery-method.html"
+                        title="اختيار وسيلة التوصيل"
+                        loading="eager"
+                    ></iframe>
+                </div>
+
+                <div id="dynamicPaymentFields" class="dynamic-fields-box">
+                    <div id="visaFields">
+                        <div class="payment-card-heading">
+                            <span class="payment-card-heading-icon"><i class="fas fa-credit-card" aria-hidden="true"></i></span>
+                            <div>
+                                <strong>بيانات البطاقة</strong>
+                                <small>أدخل رقم البطاقة وتاريخ الانتهاء ورمز الأمان</small>
+                            </div>
+                        </div>
+                        <iframe
+                            id="paymentCardFrame"
+                            class="payment-card-frame"
+                            src="payment-card.html"
+                            title="بيانات البطاقة"
+                            loading="eager"
+                        ></iframe>
+                    </div>
+                    <div id="vodafoneFields" style="display: none;">
+                        <p style="font-size: 13px; color: #856404; background: #fff3cd; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                            يرجى تحويل المبلغ الإجمالي إلى محفظتنا الكاش برقم <strong>(01095295675)</strong> ثم اكتب رقم محفظتك بالأسفل للتأكيد.
+                        </p>
+                        <div class="form-group">
+                            <label for="vfPhone">رقم المحفظة التي قمت بالتحويل منها</label>
+                            <input type="text" id="vfPhone" placeholder="xxxxxxxxxxx" maxlength="11" inputmode="numeric">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-submit-order" id="submitOrderButton"
+                    onclick="if (typeof window.handleCheckoutButtonClick === 'function') window.handleCheckoutButtonClick(); else { const feedback = document.getElementById('checkoutFeedback'); if (feedback) { feedback.textContent = 'تعذر تحميل كود إتمام الدفع. أعد تحميل الصفحة.'; feedback.hidden = false; } else { alert('تعذر تحميل كود إتمام الدفع. أعد تحميل الصفحة.'); } }">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                    <span>تأكيد الطلب وإصدار الفاتورة</span>
+                </button>
+                <p id="checkoutFeedback" class="checkout-feedback" role="status" aria-live="polite" hidden></p>
+            </form>
+        </section>
+
+        <aside class="checkout-summary-section">
+            <div class="summary-box">
+                <h3>ملخص المشتريات</h3>
+                <div id="checkoutSummaryList"></div>
+                <div class="price-breakdown" style="margin-top:15px; font-size:14px; border-top:1px solid var(--border-color); padding-top:15px; display:flex; flex-direction:column; gap:8px;">
+                    <div style="display:flex; justify-content:space-between;"><span>إجمالي المنتجات:</span> <span id="subTotal">$0</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;"><span>مصاريف الشحن:</span> <span id="deliveryFee">$0</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;"><span>مصاريف شحن وتوصيل ثابته:</span> <span>$5</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; color:gray;"><span>الضرائب (14%):</span> <span id="taxTotal">$0</span></div>
+                </div>
+                <div style="font-size:20px; font-weight:bold; color:var(--accent); margin-top:15px; text-align:left;">الإجمالي: $<span id="checkoutTotal">0</span></div>
+            </div>
+
+        </aside>
+
+        <section class="delivery-people-panel" aria-label="التواصل مع المسؤولين">
+            <iframe
+                id="contactFrame"
+                src="contact.html"
+                title="التواصل مع المسؤولين"
+                loading="eager"
+            ></iframe>
+        </section>
+    </main>
+
+    <section class="invoice-result" id="invoiceResult" hidden aria-labelledby="invoiceResultTitle">
+        <div class="invoice-result-actions">
+            <h2 id="invoiceResultTitle" class="visually-hidden">تم تسجيل طلبك بنجاح</h2>
+            <div class="invoice-result-buttons">
+                <button type="button" class="invoice-close-checkout" id="closeCheckoutInvoice" aria-label="إغلاق الفاتورة">&times;</button>
+                <button type="button" class="btn-print-invoice" id="printCheckoutInvoice">
+                    طباعة / حفظ PDF <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div id="checkoutInvoiceContent"></div>
+    </section>
+
+    <script src="invoice-monthly-reset.js?v=3"></script>
+    <script src="contact.js"></script>
+    <script src="delivery-method.js"></script>
+    <script src="payment-card.js"></script>
+    <script src="script-checkout.js?v=14"></script>
+</body>

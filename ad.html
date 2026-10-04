@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الإدارة الآمنة - Alaa & Marwan Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-admin.css">
+</head>
+<body>
+
+    <!-- بوابة الحماية الجدارية (Login Gate) -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2>Alaa & Marwam Store</h2>
+            <h3>تسجيل دخول الإدارة</h3>
+            <form id="adminLoginForm">
+                <label for="adminUser">اسم المستخدم</label>
+                <input type="text" id="adminUser" class="form-control" placeholder="اسم المستخدم أو رقم المستخدم" required autocomplete="off">
+                <label for="adminPass">كلمة المرور</label>
+                <input type="password" id="adminPass" class="form-control" placeholder="كلمة المرور مثل 123" required>
+                <button type="submit">دخول لوحة التحكم</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- محتوى لوحة التحكم السري للمدير -->
+    <div id="adminContent" style="display: none;">
+        <header class="main-header">
+            <div class="logo">Alaa & Marwan Store <span style="font-size:12px; color:gray;">(الآدمن)</span></div>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fas fa-store"></i> المتجر</a>
+                <a href="checkout.html"><i class="fas fa-credit-card"></i> الدفع والفواتير</a>
+                <a href="customer.html"><i class="fas fa-user"></i> حسابي</a>
+                <a href="ad.html" class="active"><i class="fas fa-user-shield"></i> لوحة التحكم</a>
+            </nav>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <button id="darkModeToggle" class="btn-dark-mode"><i class="fas fa-moon"></i></button>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </header>
+
+        <main class="admin-container">
+            <section class="stats-grid">
+                <div class="stat-box"><h3>إجمالي قيمة الطلبات المسجلة</h3>
+                    <p id="totalSales">$0</p></div>
+                <div class="stat-box"><h3>عدد الفواتير والطلبات</h3>
+                    <p id="totalOrders">0</p></div>
+                <div class="stat-box"><h3>القطع المعروضة بالمخزن</h3>
+                    <p id="totalProducts">0</p></section>
+ </section>
+ <div class="admin-main-layout">
+<section class="admin-form-side">
+<h3>إضافة قطعة ملابس جديدة</h3>
+<form id="addProductForm">
+<div class="form-field">
+    <label for="pTitle">اسم قطعة الملابس</label>
+    <input type="text" id="pTitle" class="form-control" required placeholder="مثال: قميص أبيض كلاسيك">
+</div>
+<div class="form-field">
+    <label for="pPrice">السعر بالدولار ($)</label>
+    <input type="number" id="pPrice" class="form-control" required placeholder="مثال: 30" min="1">
+</div>
+<div class="form-field">
+    <label for="pCategory">القسم</label>
+    <select id="pCategory" class="form-control"><option value="رجال">رجال</option>
+        <option value="شبابي">شبابي</option><option value="نساء">نساء</option><option value="أطفال">أطفال</option></select>
+</div>
+<div class="form-field">
+    <span class="form-field-label">صورة المنتج</span>
+    <div class="upload-box" id="imageDropZone">
+        <input type="file" id="pImg" class="visually-hidden" accept="image/*" aria-describedby="fileNameLabel">
+        <div class="image-preview">
+            <i class="fas fa-image" id="imagePlaceholder" aria-hidden="true"></i>
+            <img id="pImgPreview" alt="معاينة صورة المنتج" hidden>
+        </div>
+        <div class="upload-content">
+            <output id="fileNameLabel" aria-live="polite">لم يتم اختيار صورة</output>
+            <div class="upload-actions">
+                <label for="pImg" class="upload-btn"><i class="fas fa-upload" aria-hidden="true">
+
+                </i> اختيار صورة</label>
+                <button type="button" class="clear-image-btn" id="clearImageBtn" aria-label="إزالة الصورة" hidden>
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-field">
+    <label for="pDesc">وصف القطعة</label>
+    <textarea id="pDesc" class="form-control" rows="3" required placeholder="وصف تفصيلي للمقاس والخامة...">
+
+    </textarea>
+</div>
+<button type="submit" class="btn-publish"><i class="fas fa-plus" aria-hidden="true">
+
+</i> نشر المنتج</button>
+    </form>
+    </section>
+
+  <section class="admin-list-side">
+ <h3>جدول المنتجات الحالي (المخزن الرئيسي)</h3>
+<div class="admin-products-table-wrap">
+<table class="admin-table admin-products-table">
+<thead><tr><th>المنتج</th><th>القسم</th><th>السعر</th><th>التحكم</th></tr></thead>
+ <tbody id="adminProductsTable"></tbody>
+      </table>
+</div>
+<hr class="admin-table-divider">
+<h3>سجل الطلبات والفواتير الوادر من العملاء</h3>
+<table class="admin-table">
+<thead>
+    <tr><th>رقم الطلب</th><th>العميل</th>
+    <th>الهاتف</th><th>وسيلة الدفع وحالتها</th>
+    <th>وسيلة التوصيل</th><th>اليوم</th><th>التاريخ</th><th>الوقت</th><th>إجمالي الطلب</th>
+</tr>
+</thead>
+   <tbody id="adminOrdersTable"></tbody>
+   </table>
+  </section>
+  </div>
+ </main>
+ </div>
+<script src="invoice-monthly-reset.js"></script>
+<script src="script-admin.js?v=2"></script>
+</body>
+</html>

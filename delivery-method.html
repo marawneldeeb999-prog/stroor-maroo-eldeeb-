@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختيار وسيلة التوصيل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="delivery-method.css">
+</head>
+<body>
+    <main class="delivery-methods" aria-label="وسائل التوصيل">
+        <label class="delivery-option active">
+            <input type="radio" name="deliveryMethod" value="سيارة" data-fee="7" checked>
+            <i class="fas fa-car-side delivery-method-icon car-icon" aria-hidden="true"></i>
+            <span>سيارة <strong>(7%)</strong></span>
+        </label>
+        <label class="delivery-option">
+            <input type="radio" name="deliveryMethod" value="دراجة نارية" data-fee="5">
+            <i class="fas fa-motorcycle delivery-method-icon bike-icon" aria-hidden="true"></i>
+            <span>دراجة نارية <strong>(5%)</strong></span>
+        </label>
+    </main>
+    <script src="delivery-method.js"></script>
+</body>
+</html>

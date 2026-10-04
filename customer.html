@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملف المتجر اليومي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-customer.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">Alaa & Marwan Store</div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-store"></i> المتجر</a>
+            <a href="checkout.html"><i class="fas fa-credit-card"></i> الدفع والفواتير</a>
+            <a href="customer.html" class="active"><i class="fas fa-user"></i> حسابي</a>
+            <a href="ad.html" id="adminNavLink"><i class="fas fa-user-shield"></i>لوحه التحكم لدى المتجر</a>
+        </nav>
+        <button id="darkModeToggle" style="background:none; border:none; font-size:20px; color:inherit; cursor:pointer;"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <main class="customer-container">
+        <div class="profile-card">
+            <div class="avatar"><i class="fas fa-user"></i></div>
+            <div>
+                <h2>عميل عزيز (زائر جديد)</h2>
+                <p id="cPhone" style="color:var(--text-muted); margin-top:5px;">لم تقم بإصدار فواتير بعد</p>
+                <p id="cAddress" style="font-size:14px; margin-top:5px;"></p>
+            </div>
+        </div>
+
+        <div class="orders-box">
+            <h3>أرشيف مشترياتك السابقة من المتجر</h3>
+            <div class="invoice-filters" aria-label="فلترة الفواتير">
+                <button type="button" class="invoice-filter active" data-filter="all">كل الفواتير</button>
+                <button type="button" class="invoice-filter" data-filter="day">فواتير اليوم</button>
+                <button type="button" class="invoice-filter" data-filter="month">فواتير الشهر</button>
+            </div>
+            <div class="invoice-stats">
+                <div class="invoice-stat stat-all"><span>كل الفواتير</span><strong id="allInvoiceCount">0 فاتورة</strong><b id="allInvoiceProfit">$0</b></div>
+                <div class="invoice-stat stat-day"><span>فواتير اليوم</span><strong id="dayInvoiceCount">0 فاتورة</strong><b id="dayInvoiceProfit">$0</b></div>
+                <div class="invoice-stat stat-month"><span>فواتير الشهر</span><strong id="monthInvoiceCount">0 فاتورة</strong><b id="monthInvoiceProfit">$0</b></div>
+            </div>
+            <div id="customerOrdersList" style="margin-top: 15px;"></div>
+        </div>
+    </main>
+
+    <div class="invoice-modal" id="invoiceModal" hidden>
+        <div class="invoice-modal-backdrop" data-close-invoice></div>
+        <section class="invoice-paper" role="dialog" aria-modal="true" aria-labelledby="invoiceModalTitle">
+            <div class="invoice-modal-actions">
+                <button type="button" class="invoice-close-btn" data-close-invoice aria-label="إغلاق الفاتورة">&times;</button>
+                <button type="button" class="invoice-print-btn" id="printCustomerInvoice"><i class="fas fa-file-pdf"></i> طباعة / حفظ PDF</button>
+            </div>
+            <div id="invoicePaperContent"></div>
+        </section>
+    </div>
+
+    <script src="Communication.js"></script>
+    <script src="invoice-monthly-reset.js?v=3"></script>
+    <script src="script-customer.js?v=3"></script>
+</body>
+</html>

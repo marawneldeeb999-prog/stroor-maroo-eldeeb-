@@ -1,0 +1,83 @@
+:root {
+    --surface: #ffffff;
+    --surface-2: #f9fafc;
+    --primary: #2563eb;
+    --text: #1f2937;
+    --border: #dfe7f3;
+}
+
+body.dark-theme {
+    --surface: #111827;
+    --surface-2: #1f2937;
+    --primary: #60a5fa;
+    --text: #f8fafc;
+    --border: #334155;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    direction: rtl;
+    color: var(--text);
+    background: transparent;
+}
+
+.card-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px 2px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 1.05rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.card-entry-input {
+    text-align: left;
+    font-variant-numeric: tabular-nums;
+}
+
+.card-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+@media (max-width: 560px) {
+    .card-details-grid {
+        grid-template-columns: 1fr;
+    }
+}

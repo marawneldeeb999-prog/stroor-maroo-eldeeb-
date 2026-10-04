@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيانات البطاقة</title>
+    <link rel="stylesheet" href="payment-card.css">
+</head>
+<body>
+    <main class="card-fields">
+        <div class="form-group">
+            <label for="cardNum">رقم البطاقة الائتمانية (16 رقم)</label>
+            <input type="text" id="cardNum" class="card-entry-input" placeholder="4242 4242 4242 4242" maxlength="19" inputmode="numeric" autocomplete="cc-number" dir="ltr" required>
+        </div>
+        <div class="card-details-grid">
+            <div class="form-group">
+                <label for="cardCvv">الرمز (CVV)</label>
+                <input type="password" id="cardCvv" class="card-entry-input" placeholder="123" maxlength="3" inputmode="numeric" autocomplete="off" dir="ltr" required>
+            </div>
+            <div class="form-group">
+                <label for="cardExpiry">تاريخ الانتهاء (MM/YY)</label>
+                <input type="text" id="cardExpiry" class="card-entry-input" placeholder="MM/YY" maxlength="5" inputmode="numeric" autocomplete="cc-exp" dir="ltr" required>
+            </div>
+        </div>
+    </main>
+    <script src="payment-card.js"></script>
+</body>
+</html>
